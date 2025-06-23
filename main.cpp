@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <queue>
 #include <cassert>
+#include <sstream>
 #include <signal.h>
 
 volatile sig_atomic_t need_to_stop = 0;
@@ -242,10 +243,18 @@ int main(int argc, char** argv) {
     std::ios::sync_with_stdio(false);
     std::cin.tie(0);
 
-    std::string dummy;
-    std::cin >> dummy;
     int32_t n, m;
-    std::cin >> dummy >> n >> m;
+    std::string str;
+    while(std::getline(std::cin, str)) {
+        if(str[0] == 'c')
+            continue;
+
+        std::stringstream string_stream(str);
+        std::string dummy;
+        string_stream >> dummy;
+        string_stream >> dummy >> n >> m;
+        break;
+    }
             
     std::vector<int32_t>* graph = new std::vector<int32_t>[n];
     for(int32_t i = 0; i < m; i++) {
